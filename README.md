@@ -1,8 +1,10 @@
 # ac-config-deasync
 
-Fork of [vault-config](https://github.com/icodeforlove/vault-config) to preserve existing configurations while fetching secrets from GCP instead of the Vault, using [@auctionclub/ac-secrets](https://github.com/arsnexus/ac-secrets) (see https://www.npmjs.com/package/@auctionclub/ac-secrets)
+v0.1.0: Fork of [vault-config](https://github.com/icodeforlove/vault-config) to preserve existing configurations while fetching secrets from GCP instead of the Vault, using [@auctionclub/ac-secrets](https://github.com/arsnexus/ac-secrets) (see https://www.npmjs.com/package/@auctionclub/ac-secrets)
 
-```
+v0.1.1: added missing functionality from [vault-get](https://github.com/icodeforlove/vault-get), using [traverse](https://www.npmjs.com/package/traverse)
+
+```bash
 nvm use # ensures you're using 14.3.0 (needed for deasync)
 
 # copy .npmrc

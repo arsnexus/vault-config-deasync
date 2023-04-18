@@ -6,13 +6,33 @@ import __rootdirname from 'app-root-path';
 import extend from 'deep-extend';
 import Debug from 'debug';
 import atmpt from 'atmpt';
-const getSecrets = require('@auctionclub/ac-secrets');
-
+import getSecrets from '@auctionclub/ac-secrets';
+import traverse from 'traverse';
 
 const debug = Debug('vault-config');
 const VAULT_CONFIG_RCPATH = process.env.VAULT_CONFIG_RCPATH || `${__rootdirname}/.vaultrc`;
 // const VAULT_CONFIG_SECRETSPATH = process.env.VAULT_CONFIG_SECRETSPATH || `${__rootdirname}/.vaultsecrets`;
 const VAULT_GLOBAL = '__vault-config-shared__';
+
+/*
+ * this method replicates vault-get https://github.com/icodeforlove/vault-get/blob/master/src/index.js 
+ * doesn't modify the provided vaultrc, it returns a new config object as a copy including all the demanded secrets
+*/
+function applySecretsToConfig(secrets, vaultrc) {
+	let config = Object.assign({}, vaultrc);
+
+	traverse(vaultrc).forEach(function () {
+		if (this.isLeaf) {
+			let url = traverse(vaultrc).get(this.path);
+
+			let data = secrets[url];
+
+			traverse(config).set(this.path, data.value || data);
+		}
+	});
+
+	return config;
+}
 
 // make promise version of fs.readFile() + JSON.parse
 async function readJsonAsync (filename, doReject = true) {
@@ -82,7 +102,9 @@ async function loadConfigAsync () {
 	
 	try {
 		const secrets = await getSecrets();
-		configs.vault = secrets;
+		const config = applySecretsToConfig(secrets, configs.vault);
+
+		configs.vault = config;
 	
 		debug('secrets: loaded ' + Object.keys(secrets).length);
 

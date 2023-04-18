@@ -1,10 +1,10 @@
 {
   "name": "@auctionclub/vault-config-deasync",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "compatibility wrapper for .vaultrc files & GCP secrets based on @icodeforlove/vault-config",
   "main": "dist/index.js",
   "scripts": {
-    "test": "DEBUG=vault-config ./node_modules/.bin/babel-node .",
+    "test": "DEBUG=vault-config ./node_modules/.bin/babel-node src/index.js",
     "build": "./node_modules/.bin/webpack --config webpack.config.js",
     "clean": "./node_modules/.bin/babel-node ./clean-secret-files.js",
     "prepublishOnly": "./node_modules/.bin/babel-node ./clean-secret-files.js"
@@ -25,7 +25,8 @@
     "babel-runtime": "6.11.6",
     "deasync": "0.1.15",
     "debug": "4.1.1",
-    "deep-extend": "0.6.0"
+    "deep-extend": "0.6.0",
+    "traverse": "^0.6.7"
   },
   "devDependencies": {
     "babel": "6.5.2",
