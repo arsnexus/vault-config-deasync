@@ -10,7 +10,13 @@ const secretFiles = [
 function cleanSecretFiles() {
 
     if (!readyToPublish()) {
-        secretFiles.forEach(path => fs.unlinkSync(__dirname + '/' + path));
+        secretFiles.forEach(path => {
+            try {
+                fs.unlinkSync(__dirname + '/' + path)
+            } catch (error) {
+
+            }
+        });
     }
 
     return readyToPublish();
