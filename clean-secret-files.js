@@ -2,17 +2,17 @@ const fs = require('fs');
 
 const secretFiles = [
     '.env',
-    '.npmrc',
+    // '.npmrc',
     '.vaultrc',
     'secrets.json'
 ];
 
-function cleanSecretFiles() {
+export function cleanSecretFiles() {
 
     if (!readyToPublish()) {
         secretFiles.forEach(path => {
             try {
-                fs.unlinkSync(__dirname + '/' + path)
+                fs.unlinkSync(__dirname + '/' + path);
             } catch (error) {
 
             }
@@ -22,7 +22,7 @@ function cleanSecretFiles() {
     return readyToPublish();
 }
 
-function readyToPublish() {
+export function readyToPublish() {
 
     return secretFiles.every(path => {
         let p = __dirname + '/' + path;
@@ -36,7 +36,7 @@ function readyToPublish() {
     });
 }
 
-function readyToTest() {
+export function readyToTest() {
 
     return secretFiles.every(path => {
         let p = __dirname + '/' + path;

@@ -1,6 +1,6 @@
 {
   "name": "@auctionclub/vault-config-deasync",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "compatibility wrapper for .vaultrc files & GCP secrets based on @icodeforlove/vault-config",
   "main": "dist/index.js",
   "scripts": {
@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@auctionclub/ac-secrets": "0.0.2",
+    "@auctionclub/ac-secrets": "0.0.3",
     "app-root-path": "2.2.1",
     "atmpt": "1.0.3",
     "babel-runtime": "6.11.6",
